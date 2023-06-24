@@ -1,66 +1,128 @@
-const form = document.getElementById("form");
-const username = document.getElementById("username");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const password2 = document.getElementById("password2");
+function GEEKFORGEEKS(){
+	var name =
+		document.forms.RegForm.Name.value;
+	var email =
+		document.forms.RegForm.EMail.value;
+	var phone =
+		document.forms.RegForm.Telephone.value;
+	var what =
+		document.forms.RegForm.Subject.value;
+	var password =
+		document.forms.RegForm.Password.value;
+	var address =
+		document.forms.RegForm.Address.value;
+	//Javascript reGex for Email Validation.
+	var regEmail=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g;
+	// Javascript reGex for Phone Number validation.
+	var regPhone=/^\d{10}$/;					
+	// Javascript reGex for Name validation
+	var regName = /\d+$/g;						
 
-function showError(input, msg) {
-    const formControl = input.parentElement;
-    formControl.className = "form-control error";
-    const small = formControl.querySelector('small');
-    small.innerText = msg;
+	if (name == "" || regName.test(name)) {
+		window.alert("Please enter your name properly.");
+		name.focus();
+		return false;
+	}
+
+	if (address == "") {
+		window.alert("Please enter your address.");
+		address.focus();
+		return false;
+	}
+	
+	if (email == "" || !regEmail.test(email)) {
+		window.alert("Please enter a valid e-mail address.");
+		email.focus();
+		return false;
+	}
+	
+	if (password == "") {
+		alert("Please enter your password");
+		password.focus();
+		return false;
+	}
+
+	if(password.length <6){
+		alert("Password should be atleast 6 character long");
+		password.focus();
+		return false;
+
+	}
+	if (phone == "" || !regPhone.test(phone)) {
+		alert("Please enter valid phone number.");
+		phone.focus();
+		return false;
+	}
+
+	if (what.selectedIndex == -1) {
+		alert("Please enter your course.");
+		what.focus();
+		return false;
+	}
+
+	return true;
+} {
+	var name =
+		document.forms.RegForm.Name.value;
+	var email =
+		document.forms.RegForm.EMail.value;
+	var phone =
+		document.forms.RegForm.Telephone.value;
+	var what =
+		document.forms.RegForm.Subject.value;
+	var password =
+		document.forms.RegForm.Password.value;
+	var address =
+		document.forms.RegForm.Address.value;
+	//Javascript reGex for Email Validation.
+	var regEmail=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g;
+	// Javascript reGex for Phone Number validation.
+	var regPhone=/^\d{10}$/;									
+	// Javascript reGex for Name validation
+	var regName = /\d+$/g;								
+	
+
+	if (name == "" || regName.test(name)) {
+		window.alert("Please enter your name properly.");
+		name.focus();
+		return false;
+	}
+
+	if (address == "") {
+		window.alert("Please enter your address.");
+		address.focus();
+		return false;
+	}
+	
+	if (email == "" || !regEmail.test(email)) {
+		window.alert("Please enter a valid e-mail address.");
+		email.focus();
+		return false;
+	}
+	
+	if (password == "") {
+		alert("Please enter your password");
+		password.focus();
+		return false;
+	}
+
+	if(password.length <6){
+		alert("Password should be atleast 6 character long");
+		password.focus();
+		return false;
+
+	}
+	if (phone == "" || !regPhone.test(phone)) {
+		alert("Please enter valid phone number.");
+		phone.focus();
+		return false;
+	}
+
+	if (what.selectedIndex == -1) {
+		alert("Please enter your course.");
+		what.focus();
+		return false;
+	}
+
+	return true;
 }
-
-function showSuccess(input) {
-    const formControl = input.parentElement;
-    formControl.className = "form-control success";
-
-}
-
-function checkEmail(input) {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(input.value)) {
-        showSuccess(input);
-    } else {
-        showError(input, 'Email is not valid');
-    }
-}
-
-function getFieldName(input) {
-    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
-}
-
-function checkRequired(inputArray) {
-    inputArray.forEach(function (input) {
-        if (input.value.trim() === "") {
-            showError(input, `${getFieldName(input)} is required`);
-        } else {
-            showSuccess(input);
-        }
-    })
-}
-
-function checkPasswordsMatch(input1, input2) {
-    if (input1.value !== input2.value) {
-        showError(input2, "Passwords do not match");
-    }
-}
-
-function checkLength(input, min, max) {
-    if (input.value.length < min) {
-        showError(input, `${getFieldName(input)} must be at least ${min} characters`);
-    } else if (input.value.length > max) {
-        showError(input, `${getFieldName(input)} must be less than ${max} characters`);
-    } else {
-        showSuccess(input);
-    }
-}
-
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    checkRequired([username, email, password, password2]);
-    checkLength(username, 3, 15);
-    checkLength(password, 6, 25);
-    checkEmail(email);
-    checkPasswordsMatch(password, password2);
-});
