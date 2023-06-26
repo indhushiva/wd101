@@ -1,77 +1,105 @@
+<!DOCTYPE html>
 <html>
-<head>
-<title>Registration Form</title>
-</head>
 <body>
-<div id="data">
-<form align="center"><h3><b>Student Form</b></h3><br>
-<label for="name"><b>Name</b></label>
-<input type="text" id="name" required><br><br>
-<label for="email"><b>Email</b></label>
-<input type="text" id="email" required><br><br>
-<label for="name"><b>Password</b></label>
-<input type="text" id="password" required><br><br>
-<label for="name"><b>Date of Birth</b></label>
-<input type="date" id="DOB" onblur="getAge()" required><br><br>
-<input type="checkbox" id="accept" name="accept" value="yes">  
-<label for="accept"> Accept Terms and Conditions </label>
-	
-<button onclick="AddData()">Submit</button>
+
+<h2>Registration Form</h2>
+
+<div>
+<form action = "https:/www.google.com" method= "get">
+  Name:<input type="text" id="name" required><br><br>
+  Email:<input type="text" id="email" required><br><br>
+  Password:<input type="text" id="password" required><br><br>
+  Date of Birth:<input type="date" id="dob" required><br><br>
+  <input type="checkbox" id="accept" value="yes" required>
+  <label for="accept"> Accept Terms and Conditions</label><br><br>
+  <button onclick="AddData()">submit</button>  
 </form>
 </div>
-
-<div id="tab">
-<h1> Entries </h1>
-<table id="list" cellspacing="3" cellpadding="3" border="1"><thead>
+<div>
+<h1>Entries</h1>
+<table id="table" cellspacing="3" cellpadding="3" border="1" >
+<thead>
 <tr>
-<td>Name</td><td>Email</td><td>Password</td><td>Dob</td><td>accepted terms?</td>
-</tr></thead>
-<tbody></tbody></table>
-</div>
+<td>Name</td>
+<td>Email</td>
+<td>Password</td>
+<td>Dob</td>
+<td>accepted terms?</td>
+</tr>
+</thead>
+</table>
 
+</div>
 <script>
-function AddData(e)
-{
+function AddData(e){
 e.preventDefault();
-var rows="";
 var name=document.getElementById("name").value;
 var email=document.getElementById("email").value;
 var password=document.getElementById("password").value;
-var DOB=document.getElementById("DOB").value;
-if(DOB !="")
-{
-    var today = new Date();
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    var da = today.getDate() - birthDate.getDate();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    if(m<0){
-        m +=12;
-    }
-    if(da<0){
-        da +=30;
-    }
+var dob=document.getElementById("dob").value;
 
-  if(age < 18 || age > 55)
+if(dob != "")
 {
-alert("Age "+age+" is restrict");
+var today = new Date();
+var birthDate = new Date(dateString);
+var age = today.getFullYear() - birthDate.getFullYear();
+var m = today.getMonth() - birthDate.getMonth();
+var da = today.getDate() - birthDate.getDate();
+if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+age--;
+}
+if(m < 0){
+m +=12;
+}
+if(da < 0){
+da +=30;
+}
+
+if(age < 18 || age > 55)
+
+{
+alert( "Age is restrict");
 
 } else {
 
-alert("Age "+age+" is allowed");
+alert("Allowed");
 }
 } else {
-alert("please provide your date of birth");
+alert("Please enter Date of Birth");
 }
 }
 
+var accept=document.getElementById("accept").value;
+error.innerHTML = (!name || !email || !password || !dob || !accept) ? 'ALL values are required.' : '';
+if (name && email && password && dob && accept) {
+            const tableElement = document.getElementById('table');
+            const trElement = document.createElement('tr');
+            const tbodyElement = document.createElement('tbody');
+            const nameEle = document.createElement('td');
+            const emailEle = document.createElement('td');
+            const passwordEle = document.createElement('td');
+            const bodEle = document.createElement('td');
+            const acceptEle = document.createElement('td');
+            
+            nameEle.innerHTML = name;
+            emailEle.innerHTML = email;
+            passwordEle.innerHTML = password;
+            bodEle.innerHTML = dob;
+            acceptEle.innerHTML = accept;
+            
+            
+            trElement.appendChild(nameEle);
+            trElement.appendChild(emailEle);
+            trElement.appendChild(passwordEle);
+            trElement.appendChild( bodEle);
+            trElement.appendChild(acceptEle);
+            
+            tbodyElement.appendChild(trElement);
+            tableElement.appendChild(tbodyElement);
+        }
 
-rows+="<tr><td>"+name+"</td><td>"+email+"</td><td>"+password+"</td><td>"+DOB+"</td></tr>";
-$(rows).appendTo("#list tbody");
 }
 </script>
+
 </body>
 </html>
