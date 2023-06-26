@@ -4,7 +4,7 @@
 </head>
 <body>
 <div id="data">
-<form align="center"><h3><b>Student Form</b></h3><br>
+<form align="center"><h3><b>Registration Form</b></h3><br>
 <label for="name"><b>Name</b></label>
 <input type="text" id="name" required><br><br>
 <label for="email"><b>Email</b></label>
@@ -13,7 +13,7 @@
 <input type="text" id="password" required><br><br>
 <label for="name"><b>Date of Birth</b></label>
 <input type="date" id="DOB" onblur="getAge()" required><br><br>
-<input type="checkbox" id="accept" name="accept" value="yes">  
+<input type="checkbox" id="accept" name="accept" value="yes" required >  
 <label for="accept"> Accept Terms and Conditions </label>
 	
 <button onclick="AddData()">Submit</button>
