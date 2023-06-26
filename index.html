@@ -1,39 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Form Validator</title>
-</head>
+<html>
 <body>
-    <div class="container">
-        <form id="form" class="form">
-            <h2>Register With Us</h2>
-            <div class="form-control">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter username">
-                <small>Error message</small>
-            </div>
-            <div class="form-control">
-                <label for="email">Email</label>
-                <input type="text" id="email" placeholder="Enter email">
-                <small>Error message</small>
-            </div>
-            <div class="form-control">
-                <label for="password">password</label>
-                <input type="password" id="password" placeholder="Enter password">
-                <small>Error message</small>
-            </div>
-            <div class="form-control">
-                <label for="password2">Confirm Password</label>
-                <input type="password" id="password2" placeholder="Enter password again">
-                <small>Error message</small>
-            </div>
-            <button>Submit</button>
-        </form>
-    </div>
-    <script src="./script.js"></script>
+
+<h2>Registration Form</h2>
+
+<div>
+<form action="/action_page.php" method="post">
+  Name:<input type="text" id="name" required><br><br>
+  Email:<input type="text" id="email" required><br><br>
+  Password:<input type="text" id="password" required><br><br>
+  Date of Birth:<input type="date" id="dob" required><br><br>
+  <input type="checkbox" id="accept" value="yes" required>
+  <label for="accept"> Accept Terms and Conditions</label><br><br>
+  <button onclick="AddData()">submit</button>  
+</form>
+</div>
+<div>
+<h1>Entries</h1>
+<table id="table" cellspacing="3" cellpadding="3" border="1" >
+<thead>
+<tr>
+<td>Name</td>
+<td>Email</td>
+<td>Password</td>
+<td>Dob</td>
+<td>accepted terms?</td>
+</tr>
+</thead>
+</table>
+
+</div>
+<script>
+function AddData(e){
+e.preventDefault();
+var name=document.getElementById("name").value;
+var email=document.getElementById("email").value;
+var password=document.getElementById("password").value;
+var dob=document.getElementById("dob").value;
+
+if(DOB != "")
+{
+var today = new Date();
+var birthDate = new Date(dateString);
+var age = today.getFullYear() - birthDate.getFullYear();
+var m = today.getMonth() - birthDate.getMonth();
+var da = today.getDate() - birthDate.getDate();
+if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+age--;
+}
+if(m < 0){
+m +=12;
+}
+if(da < 0){
+da +=30;
+}
+
+if(age < 18 || age > 55)
+
+{
+alert( "Age is restrict");
+
+} else {
+
+alert("Allowed");
+}
+} else {
+alert("Please enter Date of Birth");
+}
+}
+
+var accept=document.getElementById("accept").value;
+error.innerHTML = (!name || !email || !password || !dob || !accept) ? 'ALL values are required.' : '';
+if (name && email && password && dob && accept) {
+            const tableElement = document.getElementById('table');
+            const trElement = document.createElement('tr');
+            const tbodyElement = document.createElement('tbody');
+            const nameEle = document.createElement('td');
+            const emailEle = document.createElement('td');
+            const passwordEle = document.createElement('td');
+            const bodEle = document.createElement('td');
+            const acceptEle = document.createElement('td');
+            
+            nameEle.innerHTML = name;
+            emailEle.innerHTML = email;
+            passwordEle.innerHTML = password;
+            bodEle.innerHTML = dob;
+            acceptEle.innerHTML = accept;
+            
+            
+            trElement.appendChild(nameEle);
+            trElement.appendChild(emailEle);
+            trElement.appendChild(passwordEle);
+            trElement.appendChild( bodEle);
+            trElement.appendChild(acceptEle);
+            
+            tbodyElement.appendChild(trElement);
+            tableElement.appendChild(tbodyElement);
+        }
+
+}
+</script>
+
 </body>
 </html>
