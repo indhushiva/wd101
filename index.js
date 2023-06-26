@@ -55,7 +55,7 @@ if(DOB !="")
         da +=30;
     }
 
-  if(age < 18 || age > 100)
+  if(age < 18 || age > 55)
 {
 alert("Age "+age+" is restrict");
 
