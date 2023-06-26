@@ -16,7 +16,7 @@
 <input type="checkbox" id="accept" name="accept" value="yes">  
 <label for="accept"> Accept Terms and Conditions </label>
 	
-<button onclick="AddData()">Add</button>
+<button onclick="AddData()">Submit</button>
 </form>
 </div>
 
@@ -24,7 +24,7 @@
 <h1> Entries </h1>
 <table id="list" cellspacing="3" cellpadding="3" border="1"><thead>
 <tr>
-<td>Name</td><td>Email</td><td>Password</td><td>Date of Birth</td>
+<td>Name</td><td>Email</td><td>Password</td><td>Dob</td><td>accepted terms?</td>
 </tr></thead>
 <tbody></tbody></table>
 </div>
@@ -34,14 +34,13 @@ function AddData(e)
 {
 e.preventDefault();
 var rows="";
-var name=document.getElementById("Name").value;
-var email=document.getElementById("Email").value;
-var password=document.getElementById("Password").value;
+var name=document.getElementById("name").value;
+var email=document.getElementById("email").value;
+var password=document.getElementById("password").value;
 var DOB=document.getElementById("DOB").value;
 rows+="<tr><td>"+name+"</td><td>"+email+"</td><td>"+password+"</td><td>"+DOB+"</td></tr>";
 $(rows).appendTo("#list tbody");
 }
 </script>
-
 </body>
 </html>
