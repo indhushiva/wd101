@@ -34,12 +34,29 @@ form.addEventListener("submit",(e)=>{
   submit();
 })
 
+
+
 const submit=()=>{
   let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     let dob = document.getElementById("dob").value;
-    let accept = document.getElementById("accept").value;
+    
+    var month_diff = Date.now() - dob.getTime();
+    var age_dt = new Date(month_diff); 
+    var year = age_dt.getUTCFullYear();
+    var age = Math.abs(year - 1970);
+    
+    if(age > 18 || age < 55 )
+    {
+     alert("accepted age");
+}
+else{
+alert("restricted access");
+}
+
+
+   let accept = document.getElementById("accept").value;
 
 
   let newArray = [name,email,password,dob,accept];
@@ -54,5 +71,37 @@ const submit=()=>{
 
 
 </script>
+</script>
+  <style type="text/css" media="screen">
+form{
+  display:flex;
+  flex-direction:column;
+  width:35vw;
+}
+form input{
+  padding:0.7em 1em;
+}
+form span{
+  padding:0.6em 1em;
+}
+form > button{
+  padding:1.1em;
+  margin:1em 1em;
+  cursor:pointer;
+}
+ul{
+  list-style:none;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr 1fr;
+  justify-content:center;
+  width:25vw;
+
+}
+ul li{
+  padding:1em 2em .8em 2em;
+  border:1px solid black;
+
+}
+</style>
 </body>
 </html>
