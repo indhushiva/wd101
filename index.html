@@ -1,105 +1,58 @@
-<!DOCTYPE html>
 <html>
 <body>
 
 <h2>Registration Form</h2>
 
 <div>
-<form action = "https:/www.google.com" method= "get">
+<form form action="#" id="formSubmission" method="get">
   Name:<input type="text" id="name" required><br><br>
   Email:<input type="text" id="email" required><br><br>
   Password:<input type="text" id="password" required><br><br>
   Date of Birth:<input type="date" id="dob" required><br><br>
   <input type="checkbox" id="accept" value="yes" required>
   <label for="accept"> Accept Terms and Conditions</label><br><br>
-  <button onclick="AddData()">submit</button>  
+  <button type="submit">Submit</button>  
 </form>
 </div>
 <div>
 <h1>Entries</h1>
-<table id="table" cellspacing="3" cellpadding="3" border="1" >
-<thead>
-<tr>
-<td>Name</td>
-<td>Email</td>
-<td>Password</td>
-<td>Dob</td>
-<td>accepted terms?</td>
-</tr>
-</thead>
-</table>
-
+<ul id="data">
+   <li>Name</li>
+   <li>Email</li>
+   <li>Password</li>
+   <li>Dob</li>
+   <li>terms accepted?</li>
+ </ul>
 </div>
+
 <script>
-function AddData(e){
-e.preventDefault();
-var name=document.getElementById("name").value;
-var email=document.getElementById("email").value;
-var password=document.getElementById("password").value;
-var dob=document.getElementById("dob").value;
+let form=document.getElementById("formSubmission");
 
-if(dob != "")
-{
-var today = new Date();
-var birthDate = new Date(dateString);
-var age = today.getFullYear() - birthDate.getFullYear();
-var m = today.getMonth() - birthDate.getMonth();
-var da = today.getDate() - birthDate.getDate();
-if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-age--;
-}
-if(m < 0){
-m +=12;
-}
-if(da < 0){
-da +=30;
-}
+let table=document.getElementById('data');
+form.addEventListener("submit",(e)=>{
+  e.preventDefault();
+  submit();
+})
 
-if(age < 18 || age > 55)
+const submit=()=>{
+  let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let dob = document.getElementById("dob").value;
+    let accept = document.getElementById("accept").value;
 
-{
-alert( "Age is restrict");
 
-} else {
-
-alert("Allowed");
-}
-} else {
-alert("Please enter Date of Birth");
-}
+  let newArray = [name,email,password,dob,accept];
+  newArray.forEach((item)=>{
+      var li = document.createElement("li");
+  var text = document.createTextNode(item);
+  li.appendChild(text);
+  table.appendChild(li);
+  })
+  form.reset(); 
 }
 
-var accept=document.getElementById("accept").value;
-error.innerHTML = (!name || !email || !password || !dob || !accept) ? 'ALL values are required.' : '';
-if (name && email && password && dob && accept) {
-            const tableElement = document.getElementById('table');
-            const trElement = document.createElement('tr');
-            const tbodyElement = document.createElement('tbody');
-            const nameEle = document.createElement('td');
-            const emailEle = document.createElement('td');
-            const passwordEle = document.createElement('td');
-            const bodEle = document.createElement('td');
-            const acceptEle = document.createElement('td');
-            
-            nameEle.innerHTML = name;
-            emailEle.innerHTML = email;
-            passwordEle.innerHTML = password;
-            bodEle.innerHTML = dob;
-            acceptEle.innerHTML = accept;
-            
-            
-            trElement.appendChild(nameEle);
-            trElement.appendChild(emailEle);
-            trElement.appendChild(passwordEle);
-            trElement.appendChild( bodEle);
-            trElement.appendChild(acceptEle);
-            
-            tbodyElement.appendChild(trElement);
-            tableElement.appendChild(tbodyElement);
-        }
 
-}
 </script>
-
 </body>
 </html>
