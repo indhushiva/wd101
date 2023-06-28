@@ -1,31 +1,66 @@
 <html>
 <body>
-
+<div class= "container">
 <h2>Registration Form</h2>
 
 <div>
 <form form action="#" id="formSubmission" method="get">
-  Name:<input type="text" id="name" required>
-  Email:<input type="text" id="email" required>
-  Password:<input type="text" id="password" required>
-  Date of Birth:<input type="date" id="dob" required>
-  <input type="checkbox" id="accept" value="yes" required>
-  <label for="accept"> Accept Terms and Conditions</label>
-  <button type="submit">Submit</button>  
+  <label for="name">Name</label>
+   <input type="text" id="name" name="name"  required>
+
+   <label for="email">Email</label>
+   <input type="email" id="email" name="email" pattern ="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required>
+
+   <label for="password">Password</label>
+   <input type="password" id="password" name="password" required>
+
+   <label for="dob">Date of Birth</label>
+   <input type="text" id="datepicker-1" required>
+
+  
+   <label for="acceptTerms">Accept Terms & Conditions</label>  <input type="checkbox" id="accept" value="yes" required>
+
+   <button type="submit">Submit</button>
 </form>
 </div>
+
 <div>
 <h1>Entries</h1>
+
 <ul id="data">
    <li>Name</li>
    <li>Email</li>
    <li>Password</li>
    <li>Dob</li>
-   <li>terms accepted?</li>
+   <li>Accepted terms?</li>
  </ul>
 </div>
 
-<script>
+</div>
+
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+ <script>
+         $(function() {
+            $( "#datepicker-1" ).datepicker({
+               dateformat:"dd-mm-yy",
+               changeMonth:true,
+               changeYear:true,
+               maxDate: '-18Y',
+               minDate: '-55Y'                         
+               
+            });
+         });
+      </script>
+
+
+
+
+
+<script >
 let form=document.getElementById("formSubmission");
 
 let table=document.getElementById('data');
@@ -40,8 +75,9 @@ const submit=()=>{
   let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    let dob = document.getElementById("dob").value;
-    let accept = document.getElementById("accept").value;
+    let dob = document.getElementById("datepicker-1").value;
+
+   let accept = document.getElementById("accept").value;
 
 
   let newArray = [name,email,password,dob,accept];
@@ -55,15 +91,34 @@ const submit=()=>{
 }
 
 
+
+
+
+
+
 </script>
-</script>
+
+
+
   <style type="text/css" media="screen">
+
+*{
+box-sizing: border-box;  
+padding-left: 50px;
+
+}
+
+
+
 
 form{
   display:flex;
   flex-direction:column;
+  
   width:35vw;
-  justify-content:center;
+ border: 3px solid #f1f1f1;
+ background-color: #ffffff;
+  
 }
 form input{
   padding:0.7em 1em;
@@ -77,6 +132,7 @@ form > button{
   cursor:pointer;
 }
 ul{
+  
   list-style:none;
   display:grid;
   grid-template-columns:1fr 1fr 1fr 1fr 1fr;
@@ -92,3 +148,4 @@ ul li{
 </style>
 </body>
 </html>
+
