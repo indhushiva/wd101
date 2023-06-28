@@ -1,32 +1,21 @@
 <html>
 <body>
-<div class= "container">
+
 <h2>Registration Form</h2>
 
 <div>
 <form form action="#" id="formSubmission" method="get">
-  <label for="name">Name</label>
-   <input type="text" id="name" name="name" required>
-
-   <label for="email">Email</label>
-   <input type="email" id="email" name="email" pattern ="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"required>
-
-   <label for="password">Password</label>
-   <input type="password" id="password" name="password" required>
-
-   <label for="dob">Date of Birth</label>
-   <input type="date" id="dob" name="dob" min ="1968-06-28" max = "2005-06-28" required>
-
-  
-   <label for="acceptTerms">Accept Terms & Conditions</label>  <input type="checkbox" id="accept" value="yes">
-
-   <button type="submit">Submit</button>
+  Name:<input type="text" id="name" required>
+  Email:<input type="text" id="email" required>
+  Password:<input type="text" id="password" required>
+  Date of Birth:<input type="date" id="dob" required>
+  <input type="checkbox" id="accept" value="yes" required>
+  <label for="accept"> Accept Terms and Conditions</label>
+  <button type="submit">Submit</button>  
 </form>
 </div>
-
 <div>
 <h1>Entries</h1>
-
 <ul id="data">
    <li>Name</li>
    <li>Email</li>
@@ -36,11 +25,7 @@
  </ul>
 </div>
 
-</div>
-
-
-
-<script >
+<script>
 let form=document.getElementById("formSubmission");
 
 let table=document.getElementById('data');
@@ -56,11 +41,7 @@ const submit=()=>{
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     let dob = document.getElementById("dob").value;
-    
-
-
-
-   let accept = document.getElementById("accept").value;
+    let accept = document.getElementById("accept").value;
 
 
   let newArray = [name,email,password,dob,accept];
@@ -75,29 +56,14 @@ const submit=()=>{
 
 
 </script>
-
+</script>
   <style type="text/css" media="screen">
-
-*{
-box-sizing: border-box;  
-
-}
-
-.container {
-  padding:50px;
-  
-  
-}
-
 
 form{
   display:flex;
   flex-direction:column;
-  
   width:35vw;
- border: 3px solid #f1f1f1;
- background-color: #ffffff;
-  
+  justify-content:center;
 }
 form input{
   padding:0.7em 1em;
@@ -126,11 +92,3 @@ ul li{
 </style>
 </body>
 </html>
-   
-
-
-
-   
-
- 
-  
