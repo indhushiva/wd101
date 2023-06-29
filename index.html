@@ -1,54 +1,129 @@
-<!DOCTYPE html>
 <html>
-<head>
-<title>Student Information Form</title>
-<script type="text/javascript">
-function valid() 
-{
-var na = document.getElementById("nm").value;
-var ag = document.getElementById("age").value;
-var em = document.getElementById("eid").value.indexOf("@");
-var mno = document.getElementById("pno").value;
-if(na==""||na==null)
-{
-alert("Enter The Name");
-return false;
-}
-else if(isNaN(ag)||ag<1||ag>100)
-{
-alert("The age must be a number between 1 and 100");
-return false;
-}
-else if(em==-1) 
-{  
-alert("E-mail ID is not valid");
-return false;
-}
-else if(mno==""||mno==null)
-{
-alert("Enter The Phone No");
-return false;
-}
-else if(isNaN(mno)||mno.length>10||mno.length<10)
-{
-alert("The mobile no. always has 10 digit numerical value");
-return false;
-}
-else
-alert("The Student Information Submitted Successfully");
-}
+
+
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script>
+         $(function() {
+            $( "#datepicker" ).datepicker({
+               dateformat:"dd-mm-yy",
+               changeMonth:true,
+               changeYear:true,
+               maxDate: '-18Y',
+               minDate: '-55Y'                         
+               
+            });
+         });
+      </script>
+
+<script>
+
+    function publishToTable() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const dob = document.getElementById('datepicker').value;
+        const accept = document.getElementById('accept').value;
+    
+        const error = document.getElementById('error');
+        error.innerHTML = (!name || !email || !password || !dob || !accept) ? 'ALL values are required.' : '';
+        if (name && email && password && dob && accept ) {
+            const tableElement = document.getElementById('table');
+            const trElement = document.createElement('tr');
+            const tbodyElement = document.createElement('tbody');
+
+            const nameEle = document.createElement('td');
+            const emailEle = document.createElement('td');
+            const passwordEle = document.createElement('td');
+            const dobEle = document.createElement('td');
+            const acceptEle = document.createElement('td');
+
+            nameEle.innerHTML = name;
+            emailEle.innerHTML = email;
+            passwordEle.innerHTML = password;
+            dobEle.innerHTML = dob;
+            acceptEle.innerHTML = accept;
+
+            trElement.appendChild(nameEle);
+            trElement.appendChild(emailEle);
+            trElement.appendChild(passwordEle);
+            trElement.appendChild(dobEle);
+            trElement.appendChild(acceptEle);
+
+            tbodyElement.appendChild(trElement);
+            tableElement.appendChild(tbodyElement);
+        }
+document.postElementById("myForm").reset();
+    }
 </script>
-</head>
-<body>
-<center><b>
-<h3>Student Information Form</h3>
-<form action="" onsubmit="return valid()" method="post">
-Name: <input type="text" id="nm"><br><br>
-Age: <input type="text" id="age"><br><br>
-Email id: <input type="text" id="eid"><br><br>
-Phone Number: <input type="text" id="pno"><br><br>
-<input type="submit" value="Submit">
-</form>
-</b></center>
+
+<style>
+
+body{
+display:flex;
+flex-direction: column;
+justify-content: center;
+}
+
+div#tables {
+            height: 300px;
+            overflow: auto;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid red;
+            border-collapse: collapse;
+            font-size: 32px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans';
+            padding: 10px;
+        }
+
+        th {
+            width: 20%;
+}
+
+</style>
+
+
+    <div class="complete">
+        <div class="form">
+             <h1>Registration Form</h1>
+            <form id="myForm">
+            <label>Name: <input id="name" type="text" required></label><br><br>
+
+             <label for="email">Email</label>
+   	<input type="email" id="email" name="email" pattern ="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"required>
+
+            <label>Password: <input id="password" type="text" required></label><br><br>
+            <label>Date of Birth: <input id="datepicker" type="text" required></label><br><br>
+            
+            <label for="acceptTerms">Accept Terms & Conditions <input type="checkbox" id="accept" value="yes" required></label><br><br>
+            
+            <span id="error"></span>
+            <button onclick="publishToTable()">Submit</button>
+            </form>
+        </div>
+        <div id="tables">
+            <table id="table">
+             <h2>Entries</h2>
+                <thead>
+                  
+                    <tr>
+                        
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Dob</th>
+                        <th>Accepted terms?</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 </body>
+
 </html>
