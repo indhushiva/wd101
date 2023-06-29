@@ -94,7 +94,7 @@ div#tables {
              <h1>Registration Form</h1>
             <form id="myForm">
             <label>Name: <input id="name" type="text" required></label><br><br>
-            <label>Email: <input id="email" type="text" pattern ="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required></label><br><br>
+            <label>Email: <input name="email" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" class="form-control" placeholder="Email*" id="email" required=""></label><br><br>
             <label>Password: <input id="password" type="text" required></label><br><br>
             <label>Date of Birth: <input id="datepicker" type="text" required></label><br><br>
             
