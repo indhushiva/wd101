@@ -1,51 +1,13 @@
 <html>
-<body>
-<div class= "container">
-<h2>Registration Form</h2>
 
-<div>
-<form form action="#" id="formSubmission" method="get">
-  <label for="name">Name</label>
-   <input type="text" id="name" name="name"  required>
-
-   <label for="email">Email</label>
-   <input type="email" id="email" name="email" pattern ="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required>
-
-   <label for="password">Password</label>
-   <input type="password" id="password" name="password" required>
-
-   <label for="dob">Date of Birth</label>
-   <input type="text" id="datepicker-1" required>
-
-  
-   <label for="acceptTerms">Accept Terms & Conditions</label>  <input type="checkbox" id="accept" value="yes" required>
-
-   <button type="submit">Submit</button>
-</form>
-</div>
-
-<div>
-<h1>Entries</h1>
-
-<ul id="data">
-   <li>Name</li>
-   <li>Email</li>
-   <li>Password</li>
-   <li>Dob</li>
-   <li>Accepted terms?</li>
- </ul>
-</div>
-
-</div>
 
 <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
       <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
- <script>
+<script>
          $(function() {
-            $( "#datepicker-1" ).datepicker({
+            $( "#datepicker" ).datepicker({
                dateformat:"dd-mm-yy",
                changeMonth:true,
                changeYear:true,
@@ -56,96 +18,109 @@
          });
       </script>
 
+<script>
 
+    function publishToTable() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const dob = document.getElementById('datepicker').value;
+        const accept = document.getElementById('accept').value;
+    
+        const error = document.getElementById('error');
+        error.innerHTML = (!name || !email || !password || !dob || !accept) ? 'ALL values are required.' : '';
+        if (name && email && password && dob && accept ) {
+            const tableElement = document.getElementById('table');
+            const trElement = document.createElement('tr');
+            const tbodyElement = document.createElement('tbody');
 
+            const nameEle = document.createElement('td');
+            const emailEle = document.createElement('td');
+            const passwordEle = document.createElement('td');
+            const dobEle = document.createElement('td');
+            const acceptEle = document.createElement('td');
 
+            nameEle.innerHTML = name;
+            emailEle.innerHTML = email;
+            passwordEle.innerHTML = password;
+            dobEle.innerHTML = dob;
+            acceptEle.innerHTML = accept;
 
-<script >
-let form=document.getElementById("formSubmission");
+            trElement.appendChild(nameEle);
+            trElement.appendChild(emailEle);
+            trElement.appendChild(passwordEle);
+            trElement.appendChild(dobEle);
+            trElement.appendChild(acceptEle);
 
-let table=document.getElementById('data');
-form.addEventListener("submit",(e)=>{
-  e.preventDefault();
-  submit();
-})
-
-
-
-const submit=()=>{
-  let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let dob = document.getElementById("datepicker-1").value;
-
-   let accept = document.getElementById("accept").value;
-
-
-  let newArray = [name,email,password,dob,accept];
-  newArray.forEach((item)=>{
-      var li = document.createElement("li");
-  var text = document.createTextNode(item);
-  li.appendChild(text);
-  table.appendChild(li);
-  })
-  form.reset(); 
-}
-
-
-
-
-
-
-
+            tbodyElement.appendChild(trElement);
+            tableElement.appendChild(tbodyElement);
+        }
+document.getElementById("myForm").reset();
+    }
 </script>
 
+<style>
 
-
-  <style type="text/css" media="screen">
-
-*{
-box-sizing: border-box;  
-padding-left: 50px;
-
+body{
+display:flex;
+flex-direction: column;
+justify-content: center;
 }
 
+div#tables {
+            height: 300px;
+            overflow: auto;
+        }
 
+        table,
+        th,
+        td {
+            border: 1px solid red;
+            border-collapse: collapse;
+            font-size: 32px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans';
+            padding: 10px;
+        }
 
+        th {
+            width: 20%;
+}
 
-form{
-  display:flex;
-  flex-direction:column;
-  
-  width:35vw;
- border: 3px solid #f1f1f1;
- background-color: #ffffff;
-  
-}
-form input{
-  padding:0.7em 1em;
-}
-form span{
-  padding:0.6em 1em;
-}
-form > button{
-  padding:1.1em;
-  margin:1em 1em;
-  cursor:pointer;
-}
-ul{
-  
-  list-style:none;
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr 1fr 1fr;
-  justify-content:center;
-  width:25vw;
-
-}
-ul li{
-  padding:1em 2em .8em 2em;
-  border:1px solid black;
-
-}
 </style>
-</body>
-</html>
 
+
+    <div class="complete">
+        <div class="form">
+             <h1>Registration Form</h1>
+            <form id="myForm">
+            <label>Name: <input id="name" type="text" required></label><br><br>
+            <label>Email: <input id="email" type="text" required></label><br><br>
+            <label>Password: <input id="password" type="text" required></label><br><br>
+            <label>Date of Birth: <input id="datepicker" type="text" required></label><br><br>
+            
+            <label for="acceptTerms">Accept Terms & Conditions <input type="checkbox" id="accept" value="yes" required></label><br><br>
+            
+            <span id="error"></span>
+            <button onclick="publishToTable()">Submit</button>
+            </form>
+        </div>
+        <div id="tables">
+            <table id="table">
+             <h2>Entries</h2>
+                <thead>
+                  
+                    <tr>
+                        
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Dob</th>
+                        <th>Accepted terms?</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
